@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Airbnb Listings</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container mt-4">
+      <h1 class="text-center">AirBnB Listings</h1>
+
+      <form id="filter-form" class="mb-4 mt-4">
+        <div class="form-row align-items-end">
+          <div class="form-group col-md-3">
+            <label for="location">Location*:</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              class="form-control"
+              placeholder="Enter location"
+              required
+            />
+          </div>
+          <div class="form-group col-md-3">
+            <label for="propertyType">Property Type:</label>
+            <select id="propertyType" name="propertyType" class="form-control">
+              <option value="">Select property type</option>
+              <!-- Options will be populated here -->
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="bedrooms">Number of Bedrooms:</label>
+            <select id="bedrooms" name="bedrooms" class="form-control">
+              <option value="">Select number of bedrooms</option>
+              <!-- Options will be populated here -->
+            </select>
+          </div>
+          <div class="form-group col-md-3 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary mr-2 w-50">
+              Submit
+            </button>
+            <button
+              type="button"
+              id="reset-button"
+              class="btn btn-secondary w-50"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div id="listing-count" class="mb-3 h5">
+        Listings that match your preferences: <span id="count">0</span>
+      </div>
+
+      <div id="listings" class="row"></div>
+      <div class="pagination justify-content-center" id="pagination"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

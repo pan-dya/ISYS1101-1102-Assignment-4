@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Confirmation</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap CSS -->
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="text-center">Booking Confirmation</h1>
+      <div class="card my-4">
+        <div class="card-body">
+          <h5 class="card-title">Your Booking Details</h5>
+          <p id="booking-details"></p>
+        </div>
+      </div>
+      <h5 class="text-center">Booked Property</h5>
+      <div class="card my-4">
+        <div class="card-body">
+          <p id="property-name" class="font-weight-bold"></p>
+          <p id="property-address"></p>
+          <p id="property-type"></p>
+          <p id="number-of-bedrooms"></p>
+        </div>
+      </div>
+      <div class="text-center">
+        <button id="return-home" class="btn btn-primary">
+          Return to Homepage
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Retrieve booking details from local storage
+      const bookingDetails = JSON.parse(localStorage.getItem("bookingDetails"));
+
+      if (bookingDetails) {
+        const bookingInfo = `
+                <strong>Arrival Date:</strong> ${bookingDetails.arrival_date}<br>
+                <strong>Departure Date:</strong> ${bookingDetails.departure_date}<br>
+                <strong>Name:</strong> ${bookingDetails.name}<br>
+                <strong>Email:</strong> ${bookingDetails.email}<br>
+                <strong>Mobile Number:</strong> ${bookingDetails.mobile_number}<br>
+                <strong>Postal Address:</strong> ${bookingDetails.postal_address}<br>
+                <strong>Home Address:</strong> ${bookingDetails.home_address}<br>
+            `;
+        document.getElementById("booking-details").innerHTML = bookingInfo;
+      } else {
+        document.getElementById("booking-details").innerText =
+          "No booking details available.";
+      }
+
+      // Fetch property details for the given listingId
+      async function fetchPropertyDetails(listingId) {
+        try {
+          const response = await fetch(`/listing/${listingId}`);
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const propertyData = await response.json();
+          console.log(propertyData);
+
+          // Ensure property details are properly accessed
+          const propertyName =
+            propertyData.name || "Property name not available.";
+          const propertyAddress = propertyData.address
+            ? propertyData.address.market
+            : "Address not available.";
+          const propertyType =
+            propertyData.propertyType || "Property type not available.";
+          const numberOfBedrooms =
+            propertyData.bedrooms || "Number of bedrooms not available.";
+
+          // Display property information
+          document.getElementById("property-name").innerText = propertyName;
+          document.getElementById(
+            "property-address"
+          ).innerHTML = `<strong>Address:</strong> ${propertyAddress}`;
+          document.getElementById(
+            "property-type"
+          ).innerHTML = `<strong>Property Type:</strong> ${propertyType}`;
+          document.getElementById(
+            "number-of-bedrooms"
+          ).innerHTML = `<strong>Number of Bedrooms:</strong> ${numberOfBedrooms}`;
+        } catch (error) {
+          console.error("Error fetching property data:", error);
+          document.getElementById("property-name").innerText =
+            "Error fetching property details.";
+        }
+      }
+
+      const listingId = bookingDetails.listingId;
+
+      // Fetch property details if listingId exists
+      if (listingId) {
+        fetchPropertyDetails(listingId);
+      } else {
+        document.getElementById("property-name").innerText =
+          "Invalid property ID.";
+      }
+
+      // Handle return to homepage
+      document.getElementById("return-home").addEventListener("click", () => {
+        window.location.href = "/";
+      });
+    </script>
+  </body>
+</html>
