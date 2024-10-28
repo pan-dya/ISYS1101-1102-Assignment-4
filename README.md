@@ -16,7 +16,7 @@ Follow these steps to set up and run the application:
 Extract the provided project ZIP file to your desired location.
 
 2. **Install Dependencies**
-Open a terminal, navigate to the project directory, and run:
+Open a terminal, navigate to the project directory (`ISYS1101-1102-Assignment-4`), and run:
 
 ```
 npm install
@@ -26,7 +26,7 @@ npm install
 In the terminal, run the following command to start the server:
 
 ```
-node app.js
+node server/app.js
 ```
 
 4. **Testing the Application**
