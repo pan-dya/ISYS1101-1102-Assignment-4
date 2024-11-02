@@ -11,22 +11,22 @@ body {
   display: flex;
   flex-direction: column;
   transition: transform 0.2s;
-} /* Ensure the card is a flex container */
+}
 .card:hover {
-    transform: scale(1.05); /* Scale up the card on hover */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .card:active {
-    border: 1px solid purple; /* Highlight border for active card */
+    border: 1px solid purple;
     color: blueviolet;
-    box-shadow: 0 14px 25px rgba(0, 123, 255, 0.5); /* Strong shadow for active card */
+    box-shadow: 0 14px 25px rgba(0, 123, 255, 0.5);
 }
 .card-body {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-} /* Allow the body to take up available space */
+}
 .pagination{
     margin-bottom: 3vh;
 }
